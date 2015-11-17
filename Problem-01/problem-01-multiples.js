@@ -22,5 +22,5 @@ Solution: 233168
                 multiplesSum += i;
             }
         }
-        console.log(multiplesSum);
+        console.log("Problem 1: " + multiplesSum);
     }
