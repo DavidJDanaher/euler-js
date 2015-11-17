@@ -9,14 +9,13 @@ By starting with 1 and 2, the first 10 terms will be:
 By considering the terms in the Fibonacci sequence whose values do not exceed four million,
 find the sum of the even-valued terms.
 
-Solution: 4613732
+https://projecteuler.net/problem=2
 */
 
 var lesser = 1;
 var greater = 2;
 var sumOfEvens = 2;
 var currentElement = 0;
-
 
 evenFibonacci(4000000);
 
@@ -33,7 +32,6 @@ function evenFibonacci(upperLimit) {
         greater = currentElement;
     }
     console.log("Problem 2: " + sumOfEvens);
-
 }
 
 function generateNextFibonacci(smaller, larger) {
