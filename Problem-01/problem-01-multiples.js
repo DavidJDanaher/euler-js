@@ -6,18 +6,22 @@ Find the sum of all the multiples of 3 or 5 below 1000
 
 https://projecteuler.net/problem=1
 */
-    var multiplesSum = 0;
-    var i = 1;
 
-    countMultiples(3, 5, 1000);
+var startTime = new Date().getMilliseconds();
+var endTime;
+var multiplesSum = 0;
+var i = 1;
 
-    function countMultiples(multipleOne, multipleTwo, iterationLimit) {
-        for (i; i < iterationLimit; i++){
-            if (i % multipleOne === 0) {
-                multiplesSum += i;
-            } else if (i % multipleTwo === 0) {
-                multiplesSum += i;
-            }
+console.log('Probelm 3: The solution [' + countMultiples(3, 5, 1000) + '] was found in [' + (endTime - startTime) + '] ms');
+
+function countMultiples(multipleOne, multipleTwo, iterationLimit) {
+    for (i; i < iterationLimit; i++){
+        if (i % multipleOne === 0) {
+            multiplesSum += i;
+        } else if (i % multipleTwo === 0) {
+            multiplesSum += i;
         }
-        console.log("Problem 1: " + multiplesSum);
     }
+    endTime = new Date().getMilliseconds();
+    return multiplesSum;
+}

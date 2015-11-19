@@ -12,12 +12,14 @@ find the sum of the even-valued terms.
 https://projecteuler.net/problem=2
 */
 
+var startTime = new Date().getMilliseconds();
+var endTime;
 var lesser = 1;
 var greater = 2;
 var sumOfEvens = 2;
 var currentElement = 0;
 
-evenFibonacci(4000000);
+console.log('Probelm 2: The solution [' + evenFibonacci(4000000) + '] was found in [' + (endTime - startTime) + '] ms');
 
 function evenFibonacci(upperLimit) {
 
@@ -31,7 +33,8 @@ function evenFibonacci(upperLimit) {
         lesser = greater;
         greater = currentElement;
     }
-    console.log("Problem 2: " + sumOfEvens);
+    endTime = new Date().getMilliseconds();
+    return sumOfEvens;
 }
 
 function generateNextFibonacci(smaller, larger) {
