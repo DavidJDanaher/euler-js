@@ -18,7 +18,7 @@ var nextElement = 0;
 var limit = 4000000;
 var sumOfEvens = 2;
 
-console.log('Probelm 2: The (recursive) solution [' + fibonacci(1, 2) + '] was found in [' + (endTime - startTime) + '] ms');
+console.log('Problem 2: The (recursive) solution [' + fibonacci(1, 2) + '] was found in [' + (endTime - startTime) + '] ms');
 
 function fibonacci(lesser, greater) {
     nextElement = lesser + greater;

@@ -19,7 +19,7 @@ var greater = 2;
 var sumOfEvens = 2;
 var currentElement = 0;
 
-console.log('Probelm 2: The solution [' + evenFibonacci(4000000) + '] was found in [' + (endTime - startTime) + '] ms');
+console.log('Problem 2: The solution [' + evenFibonacci(4000000) + '] was found in [' + (endTime - startTime) + '] ms');
 
 function evenFibonacci(upperLimit) {
 

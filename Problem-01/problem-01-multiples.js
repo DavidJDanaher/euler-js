@@ -12,7 +12,7 @@ var endTime;
 var multiplesSum = 0;
 var i = 1;
 
-console.log('Probelm 3: The solution [' + countMultiples(3, 5, 1000) + '] was found in [' + (endTime - startTime) + '] ms');
+console.log('Problem 3: The solution [' + countMultiples(3, 5, 1000) + '] was found in [' + (endTime - startTime) + '] ms');
 
 function countMultiples(multipleOne, multipleTwo, iterationLimit) {
     for (i; i < iterationLimit; i++){
