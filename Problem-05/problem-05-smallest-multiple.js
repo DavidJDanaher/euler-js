@@ -4,13 +4,13 @@
 * What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
 *
 */
-
-var startTime = new Date().getSeconds();
+var startTime;
 var endTime;
 
-console.log('Problem 5: The solution [' + smallestMultiple(20)  + '] was found in [' + (endTime - startTime) + '] s ');
+console.log('Problem 5: The solution [' + smallestMultiple(20)  + '] was found in [' + getDuration(endTime, startTime) + '] s ');
 
 function smallestMultiple(max){
+    startTime = new Date();
     var multiple = max;
     var rawMultiple = 1;
     var isDivisible;
@@ -35,6 +35,13 @@ function smallestMultiple(max){
         }
         return isDivisible;
     }
-    endTime = new Date().getSeconds();
+    endTime = new Date();
     return multiple;
+}
+
+function getDuration(endTime, startTime) {
+    var end = endTime.getSeconds() * 1000 + endTime.getMilliseconds();
+    var start = startTime.getSeconds() * 1000 + startTime.getMilliseconds();
+
+    return (end - start)/1000;
 }
