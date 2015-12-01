@@ -8,6 +8,7 @@
 var startTime;
 var endTime;
 var primesBelowMax;
+var completeFactors = [];
 
 
 // console.log('Problem 5: The solution [' + smallestMultiple(20)  + '] was found in [' + getDuration(endTime, startTime) + '] s ');
@@ -16,39 +17,45 @@ console.log(smallestMultiple(20));
 function smallestMultiple(max){
     startTime = new Date();
     var currentFactorSet;
-    var completeFactors = [];
 
     primesBelowMax = getPrimesBelow(max);
 
     for (max; max > 1; max--) {
         currentFactorSet = getFactors(max);
-
         for (var i = 0; i < currentFactorSet.length; i++) {
-            if (completeFactors.indexOf(currentFactorSet[i]) === -1) {
-                 completeFactors = placeValueInArray(currentFactorSet[i], completeFactors);
-                // completeFactors.push(currentFactorSet[i]);
-            }
+            // if (completeFactors.indexOf(currentFactorSet[i]) === -1) {
+                if (completeFactors.length > 0) {
+                    placeValueInArray(currentFactorSet[i]);
+                } else {
+                    completeFactors.push(currentFactorSet[i]);
+                }
+            // }
         }
-
     }
 
     endTime = new Date();
     return completeFactors;
 }
 
-function placeValueInArray(val, arr) {
-    if (arr.length === 0) {
-        arr.push(val);
-    }
-    for (var i = 0; i < arr.length; i++) {
-        if (arr[i] < val && val < arr[i + 1]) {
-            arr.splice(arr[i], 0, val);
-            break;
-        } else if (i === arr.length) {
-            arr.push(val);
+function placeValueInArray(val) {
+    if (completeFactors.length > 1) {
+        for (var i = 0; i < completeFactors.length; i++) {
+            if (completeFactors[i] <= val && val <= completeFactors[i + 1]) {
+                completeFactors.splice((i + 1), 0, val);
+                break;
+            } else if (val > completeFactors[completeFactors.length - 1]) {
+                completeFactors.push(val);
+                break;
+            }
+        }
+    } else {
+        if (completeFactors[0] > val) {
+            completeFactors.push(completeFactors[0]);
+            completeFactors[0] = val;
+        } else {
+            completeFactors.push(val);
         }
     }
-    return arr;
 }
 
 function getPrimesBelow(max) {
