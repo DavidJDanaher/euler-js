@@ -10,26 +10,32 @@ var endTime;
 var primesBelowMax;
 var completeFactors = [];
 
-
 // console.log('Problem 5: The solution [' + smallestMultiple(20)  + '] was found in [' + getDuration(endTime, startTime) + '] s ');
-console.log(smallestMultiple(20));
+console.log(smallestMultiple(5));
 
 function smallestMultiple(max){
     startTime = new Date();
-    var currentFactorSet;
+    var factorSet;
+    var localIndex;
 
     primesBelowMax = getPrimesBelow(max);
 
+    for (var i = 0; i < primesBelowMax.length; i++) {
+        completeFactors[i] = {
+            value: primesBelowMax[i],
+            count: 0
+        };
+    }
+
     for (max; max > 1; max--) {
-        currentFactorSet = getFactors(max);
-        for (var i = 0; i < currentFactorSet.length; i++) {
-            // if (completeFactors.indexOf(currentFactorSet[i]) === -1) {
-                if (completeFactors.length > 0) {
-                    placeValueInArray(currentFactorSet[i]);
-                } else {
-                    completeFactors.push(currentFactorSet[i]);
-                }
-            // }
+        factorSet = getFactorsOf(max);
+
+        for (var i = 0; i < factorSet.length; i++) {
+            localIndex = completeFactors.indexOf(factorSet[i].value);
+
+            if (factorSet[i].count > completeFactors[localIndex].count) {
+                completeFactors[localIndex].count = factorSet[i].count;
+            }
         }
     }
 
@@ -37,26 +43,6 @@ function smallestMultiple(max){
     return completeFactors;
 }
 
-function placeValueInArray(val) {
-    if (completeFactors.length > 1) {
-        for (var i = 0; i < completeFactors.length; i++) {
-            if (completeFactors[i] <= val && val <= completeFactors[i + 1]) {
-                completeFactors.splice((i + 1), 0, val);
-                break;
-            } else if (val > completeFactors[completeFactors.length - 1]) {
-                completeFactors.push(val);
-                break;
-            }
-        }
-    } else {
-        if (completeFactors[0] > val) {
-            completeFactors.push(completeFactors[0]);
-            completeFactors[0] = val;
-        } else {
-            completeFactors.push(val);
-        }
-    }
-}
 
 function getPrimesBelow(max) {
     var primes = [2];
@@ -79,17 +65,38 @@ function getPrimesBelow(max) {
     return primes;
 }
 
-function getFactors(val) {
+function getFactorsOf(val) {
     var factors = [];
 
     while (val > 1) {
         for (var i = 0; i < primesBelowMax.length; i++) {
             while (val % primesBelowMax[i] === 0){
+                if (factors.length === 0) {
+                    factors.push({
+                        value: primesBelowMax[i],
+                        count: 1
+                    });
+                } else {
+                    for (var j = 0; j < factors.length; j++) {
+                        if (factors[j].value === primesBelowMax[i]) {
+                            factors[j].count += 1;
+                        } else {
+                            factors.push({
+                                value: primesBelowMax[i],
+                                count: 1
+                            });
+                        }
+                    }
+                }
+
                 val /= primesBelowMax[i];
-                factors.push(primesBelowMax[i]);
             }
         }
     }
+    for(var i = 0; i < factors.length; i++) {
+        console.log(factors[i].count + ' : ' + factors[i].value);
+    }
+
     return factors;
 }
 
