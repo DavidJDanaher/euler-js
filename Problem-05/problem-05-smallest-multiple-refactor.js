@@ -10,13 +10,14 @@ var endTime;
 var primesBelowMax;
 var completeFactors = [];
 
-// console.log('Problem 5: The solution [' + smallestMultiple(20)  + '] was found in [' + getDuration(endTime, startTime) + '] s ');
-console.log(smallestMultiple(5));
-
+console.log('Problem 5: The solution [' + smallestMultiple(20)  + '] was found in [' + getDuration(endTime, startTime) + '] s ');
+console.log(getFactorsOf(18));
 function smallestMultiple(max){
     startTime = new Date();
     var factorSet;
     var localIndex;
+    var length;
+    var smallestMultiple = 1;
 
     primesBelowMax = getPrimesBelow(max);
 
@@ -29,18 +30,28 @@ function smallestMultiple(max){
 
     for (max; max > 1; max--) {
         factorSet = getFactorsOf(max);
+        length = factorSet.length;
 
-        for (var i = 0; i < factorSet.length; i++) {
-            localIndex = completeFactors.indexOf(factorSet[i].value);
+        for (var i = 0; i < length; i++) {
+            for (var j = 0; j < completeFactors.length; j++) {
+                if (completeFactors[j].value === factorSet[i].value){
+                    console.log(completeFactors[j].value + ':' + completeFactors[j].count);
+                    console.log(factorSet[i].value + ':' + factorSet[i].count);
 
-            if (factorSet[i].count > completeFactors[localIndex].count) {
-                completeFactors[localIndex].count = factorSet[i].count;
+                    if (completeFactors[j].count < factorSet[i].count) {
+                        completeFactors[j].count = factorSet[i].count;
+                    }
+                }
             }
         }
     }
 
+    for (var i = 0; i < completeFactors.length; i++) {
+        smallestMultiple *= (completeFactors[i].value * completeFactors[i].count);
+
+    }
     endTime = new Date();
-    return completeFactors;
+    return smallestMultiple;
 }
 
 
@@ -92,9 +103,6 @@ function getFactorsOf(val) {
                 val /= primesBelowMax[i];
             }
         }
-    }
-    for(var i = 0; i < factors.length; i++) {
-        console.log(factors[i].count + ' : ' + factors[i].value);
     }
 
     return factors;
