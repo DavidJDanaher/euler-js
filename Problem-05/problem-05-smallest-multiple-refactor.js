@@ -9,53 +9,49 @@ var startTime;
 var endTime;
 var primesBelowMax;
 var completeFactors = [];
+var primesLength;
 
-console.log('Problem 5: The solution [' + smallestMultiple(20)  + '] was found in [' + getDuration(endTime, startTime) + '] s ');
-console.log(getFactorsOf(18));
+console.log('Problem 5: The solution [' + smallestMultiple(20) + '] was found in [' + getDuration(endTime, startTime) + '] s ');
+
 function smallestMultiple(max){
     startTime = new Date();
     var factorSet;
+    var factorObjects;
     var localIndex;
-    var length;
+    var localLength;
     var smallestMultiple = 1;
 
-    primesBelowMax = getPrimesBelow(max);
+    primesBelowMax = generatePrimesBelow(max);
+    primesLength = primesBelowMax.length;
 
-    for (var i = 0; i < primesBelowMax.length; i++) {
-        completeFactors[i] = {
-            value: primesBelowMax[i],
-            count: 0
-        };
-    }
+    generatePrimeObjects();
 
     for (max; max > 1; max--) {
         factorSet = getFactorsOf(max);
-        length = factorSet.length;
+        factorObjects = convertToObject(factorSet);
+        localLength = factorObjects.length;
 
-        for (var i = 0; i < length; i++) {
-            for (var j = 0; j < completeFactors.length; j++) {
-                if (completeFactors[j].value === factorSet[i].value){
-                    console.log(completeFactors[j].value + ':' + completeFactors[j].count);
-                    console.log(factorSet[i].value + ':' + factorSet[i].count);
+        for (var i = 0; i < localLength; i++) {
+            for (var j = 0; j < primesLength; j++) {
+                if (completeFactors[j].value === factorObjects[i].value){
 
-                    if (completeFactors[j].count < factorSet[i].count) {
-                        completeFactors[j].count = factorSet[i].count;
+                    if (completeFactors[j].count < factorObjects[i].count) {
+                        completeFactors[j].count = factorObjects[i].count;
                     }
                 }
             }
         }
     }
 
-    for (var i = 0; i < completeFactors.length; i++) {
-        smallestMultiple *= (completeFactors[i].value * completeFactors[i].count);
-
+    for (var i = 0; i < primesLength; i++) {
+        smallestMultiple *= (Math.pow(completeFactors[i].value, completeFactors[i].count));
     }
     endTime = new Date();
     return smallestMultiple;
 }
 
 
-function getPrimesBelow(max) {
+function generatePrimesBelow(max) {
     var primes = [2];
     var value = 3;
     var isPrime = false;
@@ -76,36 +72,50 @@ function getPrimesBelow(max) {
     return primes;
 }
 
+function generatePrimeObjects() {
+    for (var i = 0; i < primesLength; i++) {
+        completeFactors[i] = {
+            value: primesBelowMax[i],
+            count: 0
+        };
+    }
+}
+
 function getFactorsOf(val) {
     var factors = [];
 
     while (val > 1) {
-        for (var i = 0; i < primesBelowMax.length; i++) {
+        for (var i = 0; i < primesLength; i++) {
             while (val % primesBelowMax[i] === 0){
-                if (factors.length === 0) {
-                    factors.push({
-                        value: primesBelowMax[i],
-                        count: 1
-                    });
-                } else {
-                    for (var j = 0; j < factors.length; j++) {
-                        if (factors[j].value === primesBelowMax[i]) {
-                            factors[j].count += 1;
-                        } else {
-                            factors.push({
-                                value: primesBelowMax[i],
-                                count: 1
-                            });
-                        }
-                    }
-                }
-
+                factors.push(primesBelowMax[i]);
                 val /= primesBelowMax[i];
             }
         }
     }
 
     return factors;
+}
+
+function convertToObject(factorSet) {
+    var length = factorSet.length;
+    var factorObjects = [];
+
+    for (var i = 0; i < primesBelowMax.length; i++) {
+        factorObjects.push({
+            value: primesBelowMax[i],
+            count: 0
+        });
+    }
+
+    for (var j = 0; j < factorObjects.length; j++) {
+        for (var i = 0; i < length; i++) {
+
+            if (factorObjects[j].value === factorSet[i]) {
+                factorObjects[j].count += 1;
+            }
+        }
+    }
+    return factorObjects;
 }
 
 function getDuration(endTime, startTime) {
