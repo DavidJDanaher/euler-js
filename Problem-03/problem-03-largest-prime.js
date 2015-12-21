@@ -9,7 +9,7 @@ https://projecteuler.net/problem=3
 var startTime = new Date().getMilliseconds();
 var endTime;
 
-console.log('Probelm 3: The solution [' + largestPrimeFactor(600851475143) + '] was found in [' + (endTime - startTime) + '] ms');
+console.log('Problem 3: The solution [' + largestPrimeFactor(600851475143) + '] was found in [' + (endTime - startTime) + '] ms');
 
 function largestPrimeFactor(upperLimit) {
     var iterationLimit = Math.sqrt(upperLimit);
