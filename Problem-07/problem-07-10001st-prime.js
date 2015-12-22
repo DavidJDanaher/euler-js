@@ -40,10 +40,6 @@ function getNthPrime(limit) {
     return lastPrime;
 }
 
-
-
-
-
 function getDuration(endTime, startTime) {
     var end = endTime.getSeconds() * 1000 + endTime.getMilliseconds();
     var start = startTime.getSeconds() * 1000 + startTime.getMilliseconds();
