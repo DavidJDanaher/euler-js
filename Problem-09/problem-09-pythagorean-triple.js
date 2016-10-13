@@ -12,7 +12,7 @@ Find the product abc.
 var startTime = new Date();;
 var endTime;
 
-console.log('Problem 8: The solution [' + productOfTriple(1000) + '] was found in [' + getDuration(endTime, startTime) + '] s ');
+console.log('Problem 9: The solution [' + productOfTriple(1000) + '] was found in [' + getDuration(endTime, startTime) + '] s ');
 
 function productOfTriple(value) {
     var limit = Math.pow(value, 2);
