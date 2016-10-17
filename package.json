@@ -1,0 +1,6 @@
+{
+    "name": "euler-js",
+    "dependencies": {
+        "minimist": "~1.2.0"
+    }
+}
