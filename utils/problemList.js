@@ -9,8 +9,9 @@ var problems = {
     'problem-6': pre + 'problem-06-sum-squares-difference.js',
     'problem-7': pre + 'problem-07-10001st-prime.js',
     'problem-8': pre + 'problem-08-largest-product.js',
-    'problem-9': pre + 'problem-09-pythagorean-triple.js'
-    // 'problem-': pre + 'problem-0',
+    'problem-9': pre + 'problem-09-pythagorean-triple.js',
+    'problem-10': pre + 'problem-10-sum-primes.js'
+    // 'problem-': pre + 'problem-',
 }
 
 module.exports = problems;
