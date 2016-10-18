@@ -25,6 +25,6 @@ function formatDuration(duration) {
     if (duration < 999) {
         return duration + ' ms';
     } else {
-        return duration + ' s';
+        return duration/1000 + ' s';
     }
 }
